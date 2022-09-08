@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main(){
+ 
+ vector<int> ht{30,10,60,10,60,50};
+ int n=ht.size();
+ vector<int> dp(n+1,-1);
+ int k=2;
+
+ dp[0]=0;
+ for(int i=1;i<n;i++){
+ 	int mmj=INT_MAX;
+ 	for(int j=1;j<=k;j++){
+ 		if(i-j>=0){
+ 			int jump=dp[i-j]+abs(ht[i]-ht[i-j]);
+			mmj=min(mmj,jump);
+ 		}
+ 	}
+ 	dp[i]=mmj;
+ }
+ cout<<dp[n-1];
+ 
+return 0;
+}
