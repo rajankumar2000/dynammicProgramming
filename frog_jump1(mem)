@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int solve(int ind,vector<int>& ht,vector<int>& dp){
+	if(ind==0)return 0;
+	if(dp[ind]!=-1)return dp[ind];
+	int two=INT_MAX;
+	int one=solve(ind-1,ht,dp)+abs(ht[ind]-ht[ind-1]);
+	if(ind>1){
+		two=solve(ind-2,ht,dp)+abs(ht[ind]-ht[ind-2]);
+	}
+	return dp[ind]=min(one,two);
+}
+int main(){
+ 
+ vector<int> ht{30,10,60,10,60,50};
+ int n=ht.size();
+ vector<int> dp(n+1,-1);
+ cout<<solve(n-1,ht,dp);
+return 0;
+}
