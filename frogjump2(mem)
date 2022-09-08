@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int solve(int ind,int k,vector<int>& dp,vector<int>& ht){
+	if(ind==0)return 0;
+	if(dp[ind]!=-1)return dp[ind];
+
+	int mmj=INT_MAX;
+	for(int j=1;j<=k;j++){
+		if(ind-j>=0){
+			int jump=solve(ind-j,k,dp,ht)+abs(ht[ind]-ht[ind-j]);
+			mmj=min(mmj,jump);
+		}
+	}
+	return dp[ind]=mmj;
+}
+int main(){
+ 
+ vector<int> ht{30,10,60,10,60,50};
+ int n=ht.size();
+ vector<int> dp(n+1,-1);
+ int k=2;
+
+ cout<<solve(n-1,k,dp,ht);
+ 
+return 0;
+}
