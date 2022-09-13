@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int solve(int ind,vector<int>& dp,vector<int>& v){
+
+	
+
+	if(ind==0)return v[ind];
+	if(ind<0)return 0;
+	
+	if(dp[ind]!=-1)return dp[ind];
+
+	int pick=v[ind]+solve(ind-2,dp,v);
+	int notpick=0+solve(ind-1,dp,v);
+
+	return dp[ind]=max(pick,notpick);
+}
+
+
+
+int main(){
+ 
+ vector<int> v={2,1,4,9};
+ int n=v.size();
+ vector<int> dp(n,-1);
+
+ cout<<solve(n-1,dp,v);
+}
