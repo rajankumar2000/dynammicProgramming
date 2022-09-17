@@ -1,0 +1,18 @@
+public:
+  long long int dp[1001][1001];
+  long long int solve(int coins[],int ind,int sum){
+      if(ind==0){
+          return dp[ind][sum]=sum%coins[ind]==0;
+      }
+      if(dp[ind][sum]!=-1)return dp[ind][sum];
+      long long int nottake=solve(coins,ind-1,sum);
+      long long int take=0;
+      if(coins[ind]<=sum)take=solve(coins,ind,sum-coins[ind]);
+      return dp[ind][sum]=take+nottake;
+  }
+    long long int count(int coins[], int N, int sum) {
+
+        // code here.
+        memset(dp,-1,sizeof(dp));
+        return solve(coins,N-1,sum);
+    }
