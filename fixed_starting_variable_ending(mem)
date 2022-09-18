@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int solve(int i,int j,vector<vector<int>>& dp,vector<vector<int>>& v,int n){
+	if(dp[i][j]!=-1)return dp[i][j];
+	if(i==n-1)return v[i][j];
+
+	int down=v[i][j]+solve(i+1,j,dp,v,n);
+	int diag=v[i][j]+solve(i+1,j+1,dp,v,n);
+
+	return dp[i][j]=min(down,diag);
+}
+int main() {
+
+	vector<vector<int> > v{{1},{2,3},{3,6,7},{8,9,6,10}};
+
+	int n=v.size();
+    
+    vector<vector<int>> dp(n,vector<int> (n,-1));
+	cout<<solve(0,0,dp,v,n);
+
+
+}
